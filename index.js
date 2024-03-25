@@ -41,38 +41,49 @@ function generatePlaylist(guardians, songs) {
     });
 }
 
-// Call generatePlaylist and store the playlists
-const playlists = generatePlaylist(guardians, songs);
+// Call generatePlaylist and display the playlists for each Guardian
+const playlist = generatePlaylist(guardians, songs);
+console.log(playlist);
+const divElement = document.getElementById("playlists");
 
-// Function to display playlists for each guardian in the HTML document
-function displayPlaylists(playlists) {
-    const playlistsContainer = document.getElementById('playlists');
+/*for(let i = 0; i < playlist.length; i++){
 
-    playlists.forEach(playlist => {
-        const guardian = Object.keys(playlist)[0];
-        const songs = playlist[guardian];
+    // create a new element
+    const div = document.createElement("div");
+    const h2 = document.createElement("h2");
+    div.className = "playlist";
+    h2.innerText = `${Object.keys(playlist[i]).toString()}'s Playlist`
 
-        const guardianDiv = document.createElement('div');
-        guardianDiv.classList.add('playlist');
-
-        const heading = document.createElement('h2');
-        heading.textContent = `${guardian}'s Playlist:`;
-
-        const playlistList = document.createElement('ul');
-        songs.forEach(song => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${song.title} - ${song.artist}`;
-            playlistList.appendChild(listItem);
-        });
-
-        guardianDiv.appendChild(heading);
-        guardianDiv.appendChild(playlistList);
-        playlistsContainer.appendChild(guardianDiv);
-    });
+    div.append(h2);
+    divElement.append(div);
+    // Iterate over each key in the object
+    for (const key in playlist[i]) {
+        const span = document.createElement("span");
+        span.className = "song-title";
+        span.innerText = key;
+        div.append(span);
+        console.log(span);
+    }
 }
+*/
+// Iterate over each character's playlist
+for (const character of playlist) {
+    
+    // create a new element
+    const div = document.createElement("div");
+    const h2 = document.createElement("h2");
+    div.className = "playlist";
+    //h2.innerText = `${Object.keys(playlist[i]).toString()}'s Playlist`;
+    console.log(character[Object.keys(character)[0]]);
 
-// Call the displayPlaylists function to render the playlists in the HTML document
-displayPlaylists(playlists);
+    div.append(h2);
+    divElement.append(div);
 
-// Log the playlists array to the console
-console.log(playlists);
+    // Access the array of songs for the current character
+    const songs = character[Object.keys(character)[0]]; // Get the first (and only) key of the character object
+    
+    // Iterate over each song in the current character's playlist
+    for (const song of songs) {
+        console.log(song.title); // Print the title of the song
+    }
+}
